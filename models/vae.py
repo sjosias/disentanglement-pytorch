@@ -149,7 +149,8 @@ class VAE(BaseDisentangler):
         return output_losses
 
     def vae_base(self, losses, x_true1, x_true2, label1, label2):
-        mu, logvar = self.model.encode(x=x_true1, c=label1)
+        
+        mu, logvar = self.model.encode(x=x_true1, c=label1) # Only works if encoder is SimpleGaussian
         z = reparametrize(mu, logvar)
         x_recon = self.model.decode(z=z, c=label1)
         loss_fn_args = dict(x_recon=x_recon, x_true=x_true1, mu=mu, logvar=logvar, z=z,

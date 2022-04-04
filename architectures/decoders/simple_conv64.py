@@ -9,7 +9,7 @@ class SimpleConv64(BaseImageEncoder):
     def __init__(self, latent_dim, num_channels, image_size):
         super().__init__(latent_dim, num_channels, image_size)
         assert image_size == 64, 'This model only works with image size 64x64.'
-
+      
         self.main = nn.Sequential(
             Unsqueeze3D(),
             nn.Conv2d(latent_dim, 256, 1, 2),
@@ -31,4 +31,5 @@ class SimpleConv64(BaseImageEncoder):
         init_layers(self._modules)
 
     def forward(self, x):
+
         return self.main(x)
